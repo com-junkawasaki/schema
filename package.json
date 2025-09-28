@@ -4,7 +4,8 @@
   "description": "JSON Schemas for Graph DSL formats",
   "main": "validate.js",
   "scripts": {
-    "validate": "node validate.js"
+    "validate": "node validate.js",
+    "validate-musubi": "node musubi-validator.js test-musubi-sample.json"
   },
   "dependencies": {
     "ajv": "^8.12.0"

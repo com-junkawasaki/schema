@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quantum Graph (QG) Spin Network Schema",
+  "description": "JSON Schema for quantum graph spin networks where links determine area/connectivity and nodes are volume quanta",
+  "type": "object",
+  "properties": {
+    "V": {
+      "type": "array",
+      "description": "Volume quanta vertices (nodes defined by links)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique vertex identifier"
+          },
+          "volume": {
+            "type": "number",
+            "description": "Volume quantum value"
+          },
+          "su2_label": {
+            "type": "object",
+            "description": "SU(2) group representation label",
+            "properties": {
+              "j": {
+                "type": "number",
+                "description": "Spin quantum number"
+              },
+              "m": {
+                "type": "number",
+                "description": "Magnetic quantum number"
+              }
+            }
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "E": {
+      "type": "array",
+      "description": "Edges (links) that determine area and connectivity",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique edge identifier"
+          },
+          "ends": {
+            "type": "array",
+            "description": "Array of endpoint vertex IDs",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "area": {
+            "type": "number",
+            "description": "Area determined by the link"
+          },
+          "su2_label": {
+            "type": "object",
+            "description": "SU(2) group representation label for the edge",
+            "properties": {
+              "j": {
+                "type": "number",
+                "description": "Spin quantum number"
+              },
+              "m": {
+                "type": "number",
+                "description": "Magnetic quantum number"
+              }
+            }
+          },
+          "connectivity": {
+            "type": "number",
+            "description": "Connectivity measure"
+          }
+        },
+        "required": ["id", "ends"],
+        "additionalProperties": false
+      }
+    },
+    "i": {
+      "type": "array",
+      "description": "Incidence/index mapping (V,E,i,ρ) structure",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vertex_id": {
+            "type": "integer",
+            "description": "Reference to vertex ID"
+          },
+          "edge_id": {
+            "type": "integer",
+            "description": "Reference to edge ID"
+          },
+          "incidence": {
+            "type": "integer",
+            "description": "Incidence value (-1, 0, 1)"
+          }
+        },
+        "required": ["vertex_id", "edge_id"],
+        "additionalProperties": false
+      }
+    },
+    "ρ": {
+      "type": "object",
+      "description": "Density/state parameter ρ",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Density value"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of density parameter",
+          "enum": ["mass", "energy", "information"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "process_algebra": {
+      "type": "object",
+      "description": "Process algebra structure (E,≤,#) for events and communication",
+      "properties": {
+        "events": {
+          "type": "array",
+          "description": "Event collection for process algebra",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique event identifier"
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Event timestamp"
+              },
+              "type": {
+                "type": "string",
+                "description": "Event type",
+                "enum": ["communication", "synchronization", "computation"]
+              },
+              "payload": {
+                "type": "object",
+                "description": "Event payload data",
+                "additionalProperties": true
+              }
+            },
+            "required": ["id", "type"],
+            "additionalProperties": false
+          }
+        },
+        "ordering": {
+          "type": "array",
+          "description": "Partial ordering ≤ between events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "before": {
+                "type": "string",
+                "description": "Event ID that comes before"
+              },
+              "after": {
+                "type": "string",
+                "description": "Event ID that comes after"
+              }
+            },
+            "required": ["before", "after"],
+            "additionalProperties": false
+          }
+        },
+        "communication_channels": {
+          "type": "array",
+          "description": "Communication channels # between processes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Channel identifier"
+              },
+              "type": {
+                "type": "string",
+                "description": "Channel type",
+                "enum": ["synchronous", "asynchronous", "buffered"]
+              },
+              "capacity": {
+                "type": "integer",
+                "description": "Channel capacity (0 for synchronous)"
+              },
+              "participants": {
+                "type": "array",
+                "description": "Participating process/event IDs",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 2
+              }
+            },
+            "required": ["id", "participants"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for quantum graph configuration",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version"
+        },
+        "quantum_type": {
+          "type": "string",
+          "description": "Type of quantum graph",
+          "enum": ["spin_network", "quantum_circuit", "process_network"]
+        },
+        "topology": {
+          "type": "string",
+          "description": "Network topology type",
+          "enum": ["loop", "tree", "lattice", "random"]
+        },
+        "units": {
+          "type": "object",
+          "description": "Unit specifications for quantum measurements",
+          "properties": {
+            "area": {
+              "type": "string",
+              "description": "Unit for area measurements"
+            },
+            "volume": {
+              "type": "string",
+              "description": "Unit for volume measurements"
+            },
+            "spin": {
+              "type": "string",
+              "description": "Unit for spin measurements"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["V", "E"],
+  "additionalProperties": false
+}

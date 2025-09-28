@@ -1,0 +1,104 @@
+{
+  "V": [
+    {
+      "id": 0,
+      "volume": 1.0,
+      "su2_label": { "j": 0.5, "m": 0.5 }
+    },
+    {
+      "id": 1,
+      "volume": 1.5,
+      "su2_label": { "j": 1.0, "m": 0.0 }
+    },
+    {
+      "id": 2,
+      "volume": 2.0,
+      "su2_label": { "j": 1.5, "m": -0.5 }
+    }
+  ],
+  "E": [
+    {
+      "id": 0,
+      "ends": [0, 1],
+      "area": 4.0,
+      "su2_label": { "j": 0.5, "m": 0.0 },
+      "connectivity": 1.0
+    },
+    {
+      "id": 1,
+      "ends": [1, 2],
+      "area": 6.0,
+      "su2_label": { "j": 1.0, "m": 1.0 },
+      "connectivity": 1.5
+    },
+    {
+      "id": 2,
+      "ends": [0, 2],
+      "area": 8.0,
+      "su2_label": { "j": 0.5, "m": -0.5 },
+      "connectivity": 2.0
+    }
+  ],
+  "i": [
+    { "vertex_id": 0, "edge_id": 0, "incidence": 1 },
+    { "vertex_id": 0, "edge_id": 2, "incidence": 1 },
+    { "vertex_id": 1, "edge_id": 0, "incidence": -1 },
+    { "vertex_id": 1, "edge_id": 1, "incidence": 1 },
+    { "vertex_id": 2, "edge_id": 1, "incidence": -1 },
+    { "vertex_id": 2, "edge_id": 2, "incidence": -1 }
+  ],
+  "ρ": {
+    "value": 0.75,
+    "type": "energy"
+  },
+  "process_algebra": {
+    "events": [
+      {
+        "id": "evt_0",
+        "timestamp": 0.0,
+        "type": "communication",
+        "payload": { "message": "spin_flip", "target": 1 }
+      },
+      {
+        "id": "evt_1",
+        "timestamp": 1.5,
+        "type": "synchronization",
+        "payload": { "barrier": "measurement" }
+      },
+      {
+        "id": "evt_2",
+        "timestamp": 3.0,
+        "type": "computation",
+        "payload": { "operation": "entanglement", "qubits": [0, 2] }
+      }
+    ],
+    "ordering": [
+      { "before": "evt_0", "after": "evt_1" },
+      { "before": "evt_1", "after": "evt_2" }
+    ],
+    "communication_channels": [
+      {
+        "id": "chan_01",
+        "type": "synchronous",
+        "capacity": 0,
+        "participants": ["evt_0", "evt_1"]
+      },
+      {
+        "id": "chan_12",
+        "type": "buffered",
+        "capacity": 10,
+        "participants": ["evt_1", "evt_2"]
+      }
+    ]
+  },
+  "meta": {
+    "schema": 1,
+    "quantum_type": "spin_network",
+    "topology": "loop",
+    "units": {
+      "area": "ℏ",
+      "volume": "ℏ²",
+      "spin": "ℏ/2"
+    }
+  }
+}
