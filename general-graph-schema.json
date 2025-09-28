@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "General Graph DSL Schema",
+  "description": "JSON Schema for general/multi-part/hypergraph DSL using v, e, ends format",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": "array",
+      "description": "Vertex collection (supports multi-part/hypergraph)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique vertex identifier"
+          },
+          "part": {
+            "type": "integer",
+            "description": "Optional partition/part identifier for multi-part graphs"
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "e": {
+      "type": "array",
+      "description": "Edge collection with ends array (supports hyperedges)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique edge identifier"
+          },
+          "ends": {
+            "type": "array",
+            "description": "Array of endpoint vertex IDs (2 for regular edges, 3+ for hyperedges)",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2
+          },
+          "attrs": {
+            "type": "object",
+            "description": "Edge attributes (spring, weight, type, etc.)",
+            "additionalProperties": true
+          }
+        },
+        "required": ["id", "ends"],
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for graph configuration",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version"
+        },
+        "directed": {
+          "type": "boolean",
+          "description": "Whether the graph is directed"
+        },
+        "units": {
+          "type": "object",
+          "description": "Unit specifications for measurements",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["v", "e"],
+  "additionalProperties": false
+}

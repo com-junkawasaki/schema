@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bipartite Graph DSL Schema",
+  "description": "JSON Schema for bipartite graph DSL using u, w, i format",
+  "type": "object",
+  "properties": {
+    "u": {
+      "type": "array",
+      "description": "Left-side vertices (U set)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique vertex identifier in U set"
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "w": {
+      "type": "array",
+      "description": "Right-side vertices (W set)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique vertex identifier in W set"
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "i": {
+      "type": "array",
+      "description": "Incidence list connecting U and W vertices",
+      "items": {
+        "type": "object",
+        "properties": {
+          "u": {
+            "type": "integer",
+            "description": "Vertex ID from U set"
+          },
+          "w": {
+            "type": "integer",
+            "description": "Vertex ID from W set"
+          }
+        },
+        "required": ["u", "w"],
+        "additionalProperties": true
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for graph configuration",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version"
+        },
+        "directed": {
+          "type": "boolean",
+          "description": "Whether the graph is directed"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["u", "w", "i"],
+  "additionalProperties": false
+}

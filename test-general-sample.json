@@ -1,0 +1,18 @@
+{
+  "v": [
+    { "id": 0, "part": 0 },
+    { "id": 1, "part": 1 },
+    { "id": 2, "part": 1 },
+    { "id": 3 }
+  ],
+  "e": [
+    { "id": 0, "ends": [0, 1], "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
+    { "id": 1, "ends": [1, 2], "attrs": { "weight": 2 } },
+    { "id": 2, "ends": [0, 2, 3], "attrs": { "type": "hyper", "weight": 1 } }
+  ],
+  "meta": {
+    "schema": 1,
+    "directed": false,
+    "units": { "pos": "world", "radius": "px" }
+  }
+}

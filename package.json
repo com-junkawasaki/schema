@@ -1,0 +1,12 @@
+{
+  "name": "graph-dsl-schemas",
+  "version": "1.0.0",
+  "description": "JSON Schemas for Graph DSL formats",
+  "main": "validate.js",
+  "scripts": {
+    "validate": "node validate.js"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0"
+  }
+}
