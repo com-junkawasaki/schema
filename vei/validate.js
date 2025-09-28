@@ -1,13 +1,14 @@
 const Ajv = require('ajv');
 const fs = require('fs');
+const path = require('path');
 
 const ajv = new Ajv({ allErrors: true });
 
-// Load schemas
-const generalSchema = JSON.parse(fs.readFileSync('general-graph-schema.json', 'utf8'));
-const bipartiteSchema = JSON.parse(fs.readFileSync('bipartite-graph-schema.json', 'utf8'));
-const quantumSchema = JSON.parse(fs.readFileSync('quantum-graph-schema.json', 'utf8'));
-const musubiSchema = JSON.parse(fs.readFileSync('musubi-graph-schema.json', 'utf8'));
+// Load schemas from organized folders
+const generalSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'general-graph-schema.json'), 'utf8'));
+const bipartiteSchema = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@uwi', 'bipartite-graph-schema.json'), 'utf8'));
+const quantumSchema = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@spin', 'quantum-graph-schema.json'), 'utf8'));
+const musubiSchema = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@musubi', 'musubi-graph-schema.json'), 'utf8'));
 
 // Compile validators
 const validateGeneral = ajv.compile(generalSchema);
@@ -16,10 +17,10 @@ const validateQuantum = ajv.compile(quantumSchema);
 const validateMusubi = ajv.compile(musubiSchema);
 
 // Test data
-const generalTestData = JSON.parse(fs.readFileSync('test-general-sample.json', 'utf8'));
-const bipartiteTestData = JSON.parse(fs.readFileSync('test-bipartite-sample.json', 'utf8'));
-const quantumTestData = JSON.parse(fs.readFileSync('test-quantum-sample.json', 'utf8'));
-const musubiTestData = JSON.parse(fs.readFileSync('test-musubi-sample.json', 'utf8'));
+const generalTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'test-general-sample.json'), 'utf8'));
+const bipartiteTestData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@uwi', 'test-bipartite-sample.json'), 'utf8'));
+const quantumTestData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@spin', 'test-quantum-sample.json'), 'utf8'));
+const musubiTestData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '@musubi', 'test-musubi-sample.json'), 'utf8'));
 
 console.log('=== Graph DSL Schema Validation ===\n');
 
