@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VEI Graph DSL Schema",
+  "description": "JSON Schema for a typed property graph using v, e, i format.",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": "array",
+      "description": "Vertex collection.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique vertex identifier."
+          },
+          "part": {
+            "type": "integer",
+            "description": "Optional partition/part identifier for multi-part graphs."
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "e": {
+      "type": "array",
+      "description": "Edge collection.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique edge identifier."
+          },
+          "attrs": {
+            "type": "object",
+            "description": "Edge attributes (spring, weight, type, etc.).",
+            "additionalProperties": true
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    "i": {
+      "type": "array",
+      "description": "Incidence list connecting vertices and edges.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "v": { "type": "integer", "description": "Vertex ID." },
+          "e": { "type": "integer", "description": "Edge ID." }
+        },
+        "required": ["v", "e"],
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for graph configuration.",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version."
+        },
+        "directed": {
+          "type": "boolean",
+          "description": "Whether the graph is directed."
+        },
+        "units": {
+          "type": "object",
+          "description": "Unit specifications for measurements.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["v", "e", "i"],
+  "additionalProperties": false
+}
