@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ENCI Graph DSL Schema (Entity-Capability-Incidence)",
+  "description": "JSON Schema for a capability-based graph using node, edge, and incidence, where entities are addressed by unforgeable capabilities.",
+  "type": "object",
+  "properties": {
+    "node": {
+      "type": "array",
+      "description": "Node collection. Each node is identified by a unique capability.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Internal unique node identifier."
+          },
+          "capability": {
+            "type": "string",
+            "description": "A unique, unforgeable capability token (e.g., URN or cryptographic hash) granting access to this node.",
+            "format": "uri"
+          },
+          "part": {
+            "type": "integer",
+            "description": "Optional partition/part identifier for multi-part graphs."
+          }
+        },
+        "required": ["id", "capability"],
+        "additionalProperties": false
+      }
+    },
+    "edge": {
+      "type": "array",
+      "description": "Edge collection. Each edge is identified by a unique capability.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Internal unique edge identifier."
+          },
+          "capability": {
+            "type": "string",
+            "description": "A unique, unforgeable capability token (e.g., URN or cryptographic hash) granting access to this edge.",
+            "format": "uri"
+          },
+          "attrs": {
+            "type": "object",
+            "description": "Edge attributes (spring, weight, type, etc.).",
+            "additionalProperties": true
+          }
+        },
+        "required": ["id", "capability"],
+        "additionalProperties": false
+      }
+    },
+    "incidence": {
+      "type": "array",
+      "description": "Incidence list connecting nodes and edges via their capabilities.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "string",
+            "description": "The capability of the node.",
+            "format": "uri"
+          },
+          "edge": {
+            "type": "string",
+            "description": "The capability of the edge.",
+            "format": "uri"
+          }
+        },
+        "required": ["node", "edge"],
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for graph configuration.",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version."
+        },
+        "directed": {
+          "type": "boolean",
+          "description": "Whether the graph is directed."
+        },
+        "units": {
+          "type": "object",
+          "description": "Unit specifications for measurements.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["node", "edge", "incidence"],
+  "additionalProperties": false
+}

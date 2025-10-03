@@ -2,9 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-JSON Schemas for four graph DSL formats designed for efficient graph representation and validation.
+JSON Schemas for six graph DSL formats designed for efficient graph representation and validation.
 
-このリポジトリには、4種類のグラフDSL形式に対するJSON Schemaが含まれています。
+このリポジトリには、6種類のグラフDSL形式に対するJSON Schemaが含まれています。
 
 ## スキーマ一覧
 
@@ -53,6 +53,15 @@ JSON Schemas for four graph DSL formats designed for efficient graph representat
   - `node`: ノード集合
   - `edge`: エッジ集合
   - `incidence`: インシデンスリスト（ノードとエッジの接続を定義）
+
+### 6. ENCIグラフDSL Schema (`enci/enci-graph-schema.json`)
+- **形式**: `node, edge, incidence` with `capability`
+- **対象**: Capability-based Graph（能力ベースグラフ）
+- **特徴**:
+  - `node`, `edge` は `id` に加えて偽造困難な `capability` トークンを持つ
+  - `incidence` は `id` の代わりに `capability` で接続を表現
+  - 各要素へのアクセス権とアドレスを一体化
+  - 分散環境下でグラフの一部を安全に共有・操作するためのスキーマ
 
 ## 使用方法
 

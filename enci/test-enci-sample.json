@@ -1,0 +1,39 @@
+{
+  "node": [
+    {
+      "id": 1,
+      "capability": "urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479"
+    },
+    {
+      "id": 2,
+      "capability": "urn:uuid:6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+    }
+  ],
+  "edge": [
+    {
+      "id": 101,
+      "capability": "urn:uuid:7b3a9c40-8a1a-4298-921a-6a5d2b1f0c3f",
+      "attrs": {
+        "type": "knows",
+        "since": "2023-01-15T10:00:00Z"
+      }
+    }
+  ],
+  "incidence": [
+    {
+      "node": "urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "edge": "urn:uuid:7b3a9c40-8a1a-4298-921a-6a5d2b1f0c3f"
+    },
+    {
+      "node": "urn:uuid:6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "edge": "urn:uuid:7b3a9c40-8a1a-4298-921a-6a5d2b1f0c3f"
+    }
+  ],
+  "meta": {
+    "schema": 1,
+    "directed": true,
+    "units": {
+      "time": "ISO-8601"
+    }
+  }
+}
