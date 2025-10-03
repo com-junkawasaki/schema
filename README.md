@@ -46,9 +46,9 @@ JSON Schemas for four graph DSL formats designed for efficient graph representat
   - SU(2)ラベル付（スピン量子数）
   - プロセス代数構造 `(E,≤,#)` でイベント・通信・同期を表現
 
-### 5. 結びグラフDSL Schema (`musubi/musubi-graph-schema.json`)
+### 5. 結びグラフDSL Schema (`engi/engi-graph-schema.json`)
 - **形式**: `F, E, eps, ties` を使用
-- **対象**: 結び正規形（musubi-model: 結びを一次、点を二次として導出）
+- **対象**: 結び正規形（engi-model: 結びを一次、点を二次として導出）
 - **特徴**:
   - `F`: フラグ集合（半辺・一次要素）
   - `E`: エッジ識別集合
@@ -64,7 +64,7 @@ JSON Schemas for four graph DSL formats designed for efficient graph representat
 ```bash
 npm install
 npm run validate          # 全スキーマ検証
-npm run validate-musubi   # musubiモデル専用検証（導出付き）
+npm run validate-engi     # engiモデル専用検証（導出付き）
 ```
 
 ### スキーマの特徴
@@ -228,7 +228,7 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
   "meta": {
     "schema": 1,
     "oriented": false,
-    "name": "musubi_triangle",
+    "name": "engi_triangle",
     "semiring": "R",
     "description": "Triangle with derived nodes from equivalence classes"
   }
@@ -243,7 +243,7 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
 - **既定値は補正しない**: 破ればエラー（再現性担保）
 - **拡張性**: `additionalProperties: true` で柔軟な属性追加を許可
 
-### Musubiモデル特有原則
+### Engiモデル特有原則
 - **結びを一次、点を二次**: 関係（ties/eps）を保存し、点を導出（N = F/∼）
 - **関手的構成**: 射・合成が圏論的に自然変換として振る舞う
 - **検証律**: 非退化・局所有限・同値閉包性を厳格に検証（loud fail）
@@ -258,7 +258,7 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
 - `w.id -> v[id].part=1`
 - `i:{u,w} -> e:{ends:[u,w]}`
 
-### Musubiモデル導出アルゴリズム
+### Engiモデル導出アルゴリズム
 結び正規形からノード・隣接・幾何を導出:
 1. **Union-Find**: `ties`から同値関係 ∼ を閉包
 2. **商集合**: N = F/∼（代表配列 `rep[f]`）
@@ -274,7 +274,7 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
 - f∼g ⇒ h_F(f)∼' h_F(g)（同値保存）
 - N(h) は関手的（商の普遍性）
 
-## Musubiモデルの理論的背景
+## Engiモデルの理論的背景
 
 ### 「結びを一次、点を二次」の思想
 - **一次要素**: フラグ(F)・エッジ(E)・同値関係(∼)・インシデンス(ε)

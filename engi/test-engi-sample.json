@@ -18,7 +18,7 @@
   "meta": {
     "schema": 1,
     "oriented": false,
-    "name": "musubi_triangle",
+    "name": "engi_triangle",
     "semiring": "R",
     "description": "Triangle with derived nodes from equivalence classes",
     "local_rules": [

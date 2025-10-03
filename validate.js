@@ -9,21 +9,21 @@ const veSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 've', 've-schem
 const veiSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'vei', 'vei-schema.json'), 'utf8'));
 const bipartiteSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'uwi', 'bipartite-graph-schema.json'), 'utf8'));
 const quantumSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'spin', 'quantum-graph-schema.json'), 'utf8'));
-const musubiSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'musubi', 'musubi-graph-schema.json'), 'utf8'));
+const engiSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'engi', 'engi-graph-schema.json'), 'utf8'));
 
 // Compile validators
 const validateVE = ajv.compile(veSchema);
 const validateVEI = ajv.compile(veiSchema);
 const validateBipartite = ajv.compile(bipartiteSchema);
 const validateQuantum = ajv.compile(quantumSchema);
-const validateMusubi = ajv.compile(musubiSchema);
+const validateEngi = ajv.compile(engiSchema);
 
 // Test data
 const veTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 've', 'test-ve-sample.json'), 'utf8'));
 const veiTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'vei', 'test-vei-sample.json'), 'utf8'));
 const bipartiteTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'uwi', 'test-bipartite-sample.json'), 'utf8'));
 const quantumTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'spin', 'test-quantum-sample.json'), 'utf8'));
-const musubiTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'musubi', 'test-musubi-sample.json'), 'utf8'));
+const engiTestData = JSON.parse(fs.readFileSync(path.join(__dirname, 'engi', 'test-engi-sample.json'), 'utf8'));
 
 console.log('=== Graph DSL Schema Validation ===\n');
 
@@ -65,13 +65,13 @@ if (quantumValid) {
   console.log('Errors:', validateQuantum.errors);
 }
 
-console.log('\n5. Musubi Graph Schema (F, E, eps, ties format):');
-const musubiValid = validateMusubi(musubiTestData);
-if (musubiValid) {
+console.log('\n5. Engi Graph Schema (F, E, eps, ties format):');
+const engiValid = validateEngi(engiTestData);
+if (engiValid) {
   console.log('✅ Valid');
 } else {
   console.log('❌ Invalid');
-  console.log('Errors:', validateMusubi.errors);
+  console.log('Errors:', validateEngi.errors);
 }
 
 console.log('\n=== Validation Complete ===');

@@ -1,4 +1,4 @@
-// Musubi Graph Validator - 検証律の実装
+// Engi Graph Validator - 検証律の実装
 // 「結びを一次、点を二次」モデルの厳格な検証
 
 class UnionFind {
@@ -31,7 +31,7 @@ class UnionFind {
   }
 }
 
-class MusubiValidator {
+class EngiValidator {
   constructor(data) {
     this.data = data;
     this.errors = [];
@@ -275,17 +275,17 @@ if (require.main === module) {
   const fs = require('fs');
 
   if (process.argv.length < 3) {
-    console.log('Usage: node musubi-validator.js <musubi-file.json>');
+    console.log('Usage: node engi-validator.js <engi-file.json>');
     process.exit(1);
   }
 
   const filename = process.argv[2];
   try {
     const data = JSON.parse(fs.readFileSync(filename, 'utf8'));
-    const validator = new MusubiValidator(data);
+    const validator = new EngiValidator(data);
     const result = validator.validate();
 
-    console.log('=== Musubi Graph Validation ===');
+    console.log('=== Engi Graph Validation ===');
     console.log(`Valid: ${result.valid ? '✅' : '❌'}`);
 
     if (result.errors.length > 0) {
@@ -311,4 +311,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { MusubiValidator };
+module.exports = { EngiValidator };

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Musubi Graph Schema (結び正規形)",
-  "description": "JSON Schema for musubi-model where ties (結び) are primary and nodes are derived as equivalence classes",
+  "title": "Engi Graph Schema (結び正規形)",
+  "description": "JSON Schema for engi-model where ties (結び) are primary and nodes are derived as equivalence classes",
   "type": "object",
   "properties": {
     "F": {
