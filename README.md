@@ -4,12 +4,12 @@
 
 JSON Schemas for four graph DSL formats designed for efficient graph representation and validation.
 
-このリポジトリには、4種類のグラフDSL形式に対するJSON Schemaが含まれています。
+このリポジトリには、5種類のグラフDSL形式に対するJSON Schemaが含まれています。
 
 ## スキーマ一覧
 
-### 1. 汎用グラフDSL Schema (`general-graph-schema.json`)
-- **形式**: `v, e, ends` を使用
+### 1. VEグラフDSL Schema (`ve/ve-schema.json`)
+- **形式**: `v, e, e.ends` を使用
 - **対象**: 一般グラフ/多部グラフ/ハイパーグラフ
 - **特徴**:
   - `v`: 頂点集合（`part` で多部を表現可能）
@@ -17,7 +17,16 @@ JSON Schemas for four graph DSL formats designed for efficient graph representat
   - ハイパーエッジ（3つ以上の端点）に対応
   - 拡張属性（`attrs`）でばね、重みなどを表現
 
-### 2. 二部グラフDSL Schema (`bipartite-graph-schema.json`)
+### 2. VEIグラフDSL Schema (`vei/vei-schema.json`)
+- **形式**: `v, e, i` を使用
+- **対象**: 一般グラフ/多部グラフ/ハイパーグラフ
+- **特徴**:
+  - `v`: 頂点集合
+  - `e`: エッジ集合
+  - `i`: インシデンスリスト（頂点とエッジの接続を定義）
+  - `ends` の冗長性を排除
+
+### 3. 二部グラフDSL Schema (`uwi/bipartite-graph-schema.json`)
 - **形式**: `u, w, i` を使用
 - **対象**: 二部グラフ専用（糖衣構文）
 - **特徴**:
@@ -26,18 +35,18 @@ JSON Schemas for four graph DSL formats designed for efficient graph representat
   - `i`: インシデンスリスト（U-W間の接続）
   - LLMに優しい短いキー名
 
-### 3. 量子グラフDSL Schema (`quantum-graph-schema.json`)
+### 4. 量子グラフDSL Schema (`spin/quantum-graph-schema.json`)
 - **形式**: `V, E, i, ρ` を使用
 - **対象**: 量子スピンネットワーク（QG: Quantum Graph）
 - **特徴**:
   - `V`: 体積量子頂点（リンクによって定義されるノード）
   - `E`: 面積・接続性を決めるリンク（エッジ）
-  - `i`: インシデンス/インデックス写像
+  - `i`: インシデデンス/インデックス写像
   - `ρ`: 密度/状態パラメータ
   - SU(2)ラベル付（スピン量子数）
   - プロセス代数構造 `(E,≤,#)` でイベント・通信・同期を表現
 
-### 4. 結びグラフDSL Schema (`musubi-graph-schema.json`)
+### 5. 結びグラフDSL Schema (`musubi/musubi-graph-schema.json`)
 - **形式**: `F, E, eps, ties` を使用
 - **対象**: 結び正規形（musubi-model: 結びを一次、点を二次として導出）
 - **特徴**:
@@ -60,7 +69,7 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
 
 ### スキーマの特徴
 
-#### 汎用形式の例
+#### VE形式の例
 ```json
 {
   "v": [
@@ -73,6 +82,37 @@ npm run validate-musubi   # musubiモデル専用検証（導出付き）
     { "id": 0, "ends": [0, 1], "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
     { "id": 1, "ends": [1, 2], "attrs": { "weight": 2 } },
     { "id": 2, "ends": [0, 2, 3], "attrs": { "type": "hyper", "weight": 1 } }
+  ],
+  "meta": {
+    "schema": 1,
+    "directed": false,
+    "units": { "pos": "world", "radius": "px" }
+  }
+}
+```
+
+#### VEI形式の例
+```json
+{
+  "v": [
+    { "id": 0, "part": 0 },
+    { "id": 1, "part": 1 },
+    { "id": 2, "part": 1 },
+    { "id": 3 }
+  ],
+  "e": [
+    { "id": 0, "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
+    { "id": 1, "attrs": { "weight": 2 } },
+    { "id": 2, "attrs": { "type": "hyper", "weight": 1 } }
+  ],
+  "i": [
+    { "v": 0, "e": 0 },
+    { "v": 1, "e": 0 },
+    { "v": 1, "e": 1 },
+    { "v": 2, "e": 1 },
+    { "v": 0, "e": 2 },
+    { "v": 2, "e": 2 },
+    { "v": 3, "e": 2 }
   ],
   "meta": {
     "schema": 1,
