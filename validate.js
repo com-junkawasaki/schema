@@ -65,7 +65,7 @@ if (quantumValid) {
   console.log('Errors:', validateQuantum.errors);
 }
 
-console.log('\n5. Engi Graph Schema (F, E, eps, ties format):');
+console.log('\n5. Engi Graph Schema (node, edge, incidence format):');
 const engiValid = validateEngi(engiTestData);
 if (engiValid) {
   console.log('✅ Valid');

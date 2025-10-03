@@ -1,0 +1,27 @@
+{
+  "node": [
+    { "id": 0, "part": 0 },
+    { "id": 1, "part": 1 },
+    { "id": 2, "part": 1 },
+    { "id": 3 }
+  ],
+  "edge": [
+    { "id": 0, "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
+    { "id": 1, "attrs": { "weight": 2 } },
+    { "id": 2, "attrs": { "type": "hyper", "weight": 1 } }
+  ],
+  "incidence": [
+    { "node": 0, "edge": 0 },
+    { "node": 1, "edge": 0 },
+    { "node": 1, "edge": 1 },
+    { "node": 2, "edge": 1 },
+    { "node": 0, "edge": 2 },
+    { "node": 2, "edge": 2 },
+    { "node": 3, "edge": 2 }
+  ],
+  "meta": {
+    "schema": 1,
+    "directed": false,
+    "units": { "pos": "world", "radius": "px" }
+  }
+}
