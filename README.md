@@ -2,9 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-JSON Schemas for six graph DSL formats designed for efficient graph representation and validation.
+JSON Schemas for seven graph DSL formats designed for efficient graph representation and validation.
 
-このリポジトリには、6種類のグラフDSL形式に対するJSON Schemaが含まれています。
+このリポジトリには、7種類のグラフDSL形式に対するJSON Schemaが含まれています。
 
 ## スキーマ一覧
 
@@ -63,67 +63,16 @@ JSON Schemas for six graph DSL formats designed for efficient graph representati
   - 各要素へのアクセス権とアドレスを一体化
   - 分散環境下でグラフの一部を安全に共有・操作するためのスキーマ
 
+### 7. INGAグラフDSL Schema (`inga/inga-graph-schema.json`)
+- **形式**: `node, edge, incidence` (Typed Property Graph)
+- **対象**: 一般グラフ/多部グラフ/ハイパーグラフ
+- **特徴**:
+  - `node`: ノード集合 (`type` と `attrs` を持つ)
+  - `edge`: エッジ集合 (`type` と `attrs` を持つ)
+  - `incidence`: インシデンスリスト（ノードとエッジの接続を定義）
+  - 型付きプロパティグラフの汎用的なスキーマ
+
 ## 使用方法
 
 ### 検証スクリプト
-```bash
-npm install
-npm run validate          # 全スキーマ検証
 ```
-
-### スキーマの特徴
-
-#### VE形式の例
-```json
-{
-  "node": [
-    { "id": 0, "part": 0 },
-    { "id": 1, "part": 1 },
-    { "id": 2, "part": 1 },
-    { "id": 3 }
-  ],
-  "edge": [
-    { "id": 0, "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
-    { "id": 1, "attrs": { "weight": 2 } },
-    { "id": 2, "attrs": { "type": "hyper", "weight": 1 } }
-  ],
-  "incidence": [
-    { "node": 0, "edge": 0 },
-    { "node": 1, "edge": 0 },
-    { "node": 1, "edge": 1 },
-    { "node": 2, "edge": 1 },
-    { "node": 0, "edge": 2 },
-    { "node": 2, "edge": 2 },
-    { "node": 3, "edge": 2 }
-  ],
-  "meta": {
-    "schema": 1,
-    "directed": false,
-    "units": { "pos": "world", "radius": "px" }
-  }
-}
-```
-
-## 設計原則
-
-### 共通原則
-- **IDは整数連番**: 配列は昇順（カノニカル順）
-- **自由文ラベルは別オブジェクト**: `labels: { "0":"A", ... }` で分離
-- **既定値は補正しない**: 破ればエラー（再現性担保）
-- **拡張性**: `additionalProperties: true` で柔軟な属性追加を許可
-
-## 相互変換
-
-### 二部グラフ → 汎用グラフ
-二部グラフ形式はローダで機械的に汎用形式へ変換可能:
-- `u.id -> v[id].part=0`
-- `w.id -> v[id].part=1`
-- `i:{u,w} -> e:{ends:[u,w]}`
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
