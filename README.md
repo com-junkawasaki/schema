@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-JSON Schemas for seven graph DSL formats designed for efficient graph representation and validation.
+JSON Schemas for eight graph DSL formats designed for efficient graph representation and validation.
 
 このリポジトリには、8種類のグラフDSL形式に対するJSON Schemaが含まれています。
 
@@ -72,7 +72,7 @@ JSON Schemas for seven graph DSL formats designed for efficient graph representa
   - `incidence`: インシデンスリスト（ノードとエッジの接続を定義）
   - 型付きプロパティグラフの汎用的なスキーマ
 
-### 8. ENISHIグラフDSL Schema (`@enishi/enishi-graph-schema.json`)
+### 8. ENISHIグラフDSL Schema (`enishi/enishi-graph-schema.json`)
 - **形式**: `node, edge, incidence` (Typed Property Graph)
 - **対象**: 一般グラフ/多部グラフ/ハイパーグラフ
 - **特徴**:
