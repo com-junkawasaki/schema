@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique vertex identifier."
           },
           "part": {
@@ -30,7 +30,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique edge identifier."
           },
           "attrs": {
@@ -49,8 +49,8 @@
       "items": {
         "type": "object",
         "properties": {
-          "v": { "type": "integer", "description": "Vertex ID." },
-          "e": { "type": "integer", "description": "Edge ID." }
+          "v": { "type": "string", "description": "Vertex ID." },
+          "e": { "type": "string", "description": "Edge ID." }
         },
         "required": ["v", "e"],
         "additionalProperties": false

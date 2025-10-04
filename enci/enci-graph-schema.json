@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Internal unique node identifier."
           },
           "capability": {
@@ -35,7 +35,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Internal unique edge identifier."
           },
           "capability": {

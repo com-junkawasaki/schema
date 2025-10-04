@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique vertex identifier in U set"
           }
         },
@@ -26,7 +26,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique vertex identifier in W set"
           }
         },
@@ -41,11 +41,11 @@
         "type": "object",
         "properties": {
           "u": {
-            "type": "integer",
+            "type": "string",
             "description": "Vertex ID from U set"
           },
           "w": {
-            "type": "integer",
+            "type": "string",
             "description": "Vertex ID from W set"
           }
         },

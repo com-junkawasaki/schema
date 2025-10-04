@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique node identifier."
           },
           "type": {
@@ -39,7 +39,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique edge identifier."
           },
           "type": {
@@ -62,8 +62,8 @@
       "items": {
         "type": "object",
         "properties": {
-          "node": { "type": "integer", "description": "Node ID." },
-          "edge": { "type": "integer", "description": "Edge ID." }
+          "node": { "type": "string", "description": "Node ID." },
+          "edge": { "type": "string", "description": "Edge ID." }
         },
         "required": ["node", "edge"],
         "additionalProperties": false

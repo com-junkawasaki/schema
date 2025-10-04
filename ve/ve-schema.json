@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique vertex identifier"
           },
           "part": {
@@ -30,14 +30,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique edge identifier"
           },
           "ends": {
             "type": "array",
             "description": "Array of endpoint vertex IDs (2 for regular edges, 3+ for hyperedges)",
             "items": {
-              "type": "integer"
+              "type": "string"
             },
             "minItems": 2
           },

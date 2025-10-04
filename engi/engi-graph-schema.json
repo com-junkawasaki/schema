@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique node identifier."
           },
           "type": {
@@ -19,7 +19,7 @@
             "description": "Node type or label."
           },
           "part": {
-            "type": "integer",
+            "type": "string",
             "description": "Optional partition/part identifier for multi-part graphs."
           },
           "properties": {
@@ -39,7 +39,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique edge identifier."
           },
           "type": {
@@ -62,8 +62,8 @@
       "items": {
         "type": "object",
         "properties": {
-          "node": { "type": "integer", "description": "Node ID." },
-          "edge": { "type": "integer", "description": "Edge ID." },
+          "node": { "type": "string", "description": "Node ID." },
+          "edge": { "type": "string", "description": "Edge ID." },
           "type": {
             "type": "string",
             "description": "Incidence type, e.g., for hyperedges or directed graphs (source/target)."
@@ -83,7 +83,7 @@
       "description": "Metadata for graph configuration.",
       "properties": {
         "schema": {
-          "type": "integer",
+          "type": "string",
           "description": "Schema version."
         },
         "directed": {

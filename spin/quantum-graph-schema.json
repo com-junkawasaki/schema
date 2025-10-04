@@ -11,7 +11,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique vertex identifier"
           },
           "volume": {
@@ -44,14 +44,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "Unique edge identifier"
           },
           "ends": {
             "type": "array",
             "description": "Array of endpoint vertex IDs",
             "items": {
-              "type": "integer"
+              "type": "string"
             },
             "minItems": 2,
             "maxItems": 2
@@ -90,11 +90,11 @@
         "type": "object",
         "properties": {
           "vertex_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Reference to vertex ID"
           },
           "edge_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Reference to edge ID"
           },
           "incidence": {
