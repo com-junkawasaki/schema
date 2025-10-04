@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ENISHI Graph DSL Schema",
+  "description": "JSON Schema for a typed property graph using node, edge, incidence, meta format.",
+  "type": "object",
+  "properties": {
+    "node": {
+      "type": "array",
+      "description": "Node collection.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique node identifier."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of node."
+          },
+          "part": {
+            "type": "integer",
+            "description": "Optional partition/part identifier for multi-part graphs."
+          },
+          "attrs": {
+            "type": "object",
+            "description": "Node attributes.",
+            "additionalProperties": true
+          }
+        },
+        "required": ["id", "type"],
+        "additionalProperties": false
+      }
+    },
+    "edge": {
+      "type": "array",
+      "description": "Edge collection.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique edge identifier."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of edge."
+          },
+          "attrs": {
+            "type": "object",
+            "description": "Edge attributes (spring, weight, etc.).",
+            "additionalProperties": true
+          }
+        },
+        "required": ["id", "type"],
+        "additionalProperties": false
+      }
+    },
+    "incidence": {
+      "type": "array",
+      "description": "Incidence list connecting nodes and edges.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "node": { "type": "integer", "description": "Node ID." },
+          "edge": { "type": "integer", "description": "Edge ID." }
+        },
+        "required": ["node", "edge"],
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for graph configuration.",
+      "properties": {
+        "schema": {
+          "type": "integer",
+          "description": "Schema version."
+        },
+        "directed": {
+          "type": "boolean",
+          "description": "Whether the graph is directed."
+        },
+        "units": {
+          "type": "object",
+          "description": "Unit specifications for measurements.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["node", "edge", "incidence"],
+  "additionalProperties": false
+}
