@@ -14,12 +14,21 @@
             "type": "integer",
             "description": "Unique node identifier."
           },
+          "type": {
+            "type": "string",
+            "description": "Node type or label."
+          },
           "part": {
             "type": "integer",
             "description": "Optional partition/part identifier for multi-part graphs."
+          },
+          "properties": {
+            "type": "object",
+            "description": "Node properties.",
+            "additionalProperties": true
           }
         },
-        "required": ["id"],
+        "required": ["id", "type"],
         "additionalProperties": false
       }
     },
@@ -33,13 +42,17 @@
             "type": "integer",
             "description": "Unique edge identifier."
           },
-          "attrs": {
+          "type": {
+            "type": "string",
+            "description": "Edge type or label."
+          },
+          "properties": {
             "type": "object",
-            "description": "Edge attributes (spring, weight, type, etc.).",
+            "description": "Edge properties (spring, weight, type, etc.).",
             "additionalProperties": true
           }
         },
-        "required": ["id"],
+        "required": ["id", "type"],
         "additionalProperties": false
       }
     },
@@ -50,7 +63,16 @@
         "type": "object",
         "properties": {
           "node": { "type": "integer", "description": "Node ID." },
-          "edge": { "type": "integer", "description": "Edge ID." }
+          "edge": { "type": "integer", "description": "Edge ID." },
+          "type": {
+            "type": "string",
+            "description": "Incidence type, e.g., for hyperedges or directed graphs (source/target)."
+          },
+          "properties": {
+            "type": "object",
+            "description": "Incidence properties.",
+            "additionalProperties": true
+          }
         },
         "required": ["node", "edge"],
         "additionalProperties": false

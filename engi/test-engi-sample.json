@@ -1,23 +1,23 @@
 {
   "node": [
-    { "id": 0, "part": 0 },
-    { "id": 1, "part": 1 },
-    { "id": 2, "part": 1 },
-    { "id": 3 }
+    { "id": 0, "type": "person", "part": 0, "properties": { "name": "A" } },
+    { "id": 1, "type": "person", "part": 1, "properties": { "name": "B" } },
+    { "id": 2, "type": "person", "part": 1, "properties": { "name": "C" } },
+    { "id": 3, "type": "concept", "properties": { "name": "D" } }
   ],
   "edge": [
-    { "id": 0, "attrs": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
-    { "id": 1, "attrs": { "weight": 2 } },
-    { "id": 2, "attrs": { "type": "hyper", "weight": 1 } }
+    { "id": 0, "type": "knows", "properties": { "spring": { "k": 20, "rest": 30 }, "weight": 1 } },
+    { "id": 1, "type": "knows", "properties": { "weight": 2 } },
+    { "id": 2, "type": "hyper", "properties": { "weight": 1 } }
   ],
   "incidence": [
     { "node": 0, "edge": 0 },
     { "node": 1, "edge": 0 },
     { "node": 1, "edge": 1 },
     { "node": 2, "edge": 1 },
-    { "node": 0, "edge": 2 },
-    { "node": 2, "edge": 2 },
-    { "node": 3, "edge": 2 }
+    { "node": 0, "edge": 2, "type": "member" },
+    { "node": 2, "edge": 2, "type": "member" },
+    { "node": 3, "edge": 2, "type": "member" }
   ],
   "meta": {
     "schema": 1,
